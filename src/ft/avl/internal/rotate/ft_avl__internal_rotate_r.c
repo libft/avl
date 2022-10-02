@@ -25,9 +25,7 @@ void	ft_avl__internal_rotate_r(t_ft_avl__node *z)
 	const t_ft_avl__internal_rotate	d = collect(z);
 
 	z->left = d.t;
-	d.t->parent = z;
 	d.y->right = z;
-	z->parent = d.y;
 	z->depth = z->right->depth;
 	if (z->depth < d.y->depth)
 		z->depth = d.y->depth;

@@ -17,7 +17,6 @@
 
 typedef struct s_ft_avl__node
 {
-	struct s_ft_avl__node	*parent;
 	struct s_ft_avl__node	*left;
 	struct s_ft_avl__node	*right;
 	void					*key;
