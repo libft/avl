@@ -10,27 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_AVL__INTERNAL_H
-# define FT_AVL__INTERNAL_H
+#include "ft_avl__internal.h"
 
-# include "ft_avl__types.h"
+#include "ftc__stdlib.h"
+#include "ftc__string.h"
 
 t_ft_avl__node	*ft_avl__internal_new_node(
-					void *key,
-					size_t key_length,
-					void *value,
-					size_t value_length);
-void			ft_avl__internal_rotate_l(
-					t_ft_avl__node *z);
-void			ft_avl__internal_rotate_r(
-					t_ft_avl__node *z);
-void			ft_avl__internal_balance_ll(
-					t_ft_avl__node *z);
-void			ft_avl__internal_balance_lr(
-					t_ft_avl__node *z);
-void			ft_avl__internal_balance_rl(
-					t_ft_avl__node *z);
-void			ft_avl__internal_balance_rr(
-					t_ft_avl__node *z);
+	void *key,
+	size_t key_length,
+	void *value,
+	size_t value_length
+)
+{
+	t_ft_avl__node *const	result = ftc__malloc(
+			sizeof(t_ft_avl__node) + key_length + value_length);
 
-#endif
+	if (!result)
+		return (NULL);
+	result->key = &result->value[value_length];
+	ftc__memcpy(result->value, value, value_length);
+	ftc__memcpy(result->key, key, key_length);
+	result->left = NULL;
+	result->right = NULL;
+	result->depth = 1;
+	return (result);
+}

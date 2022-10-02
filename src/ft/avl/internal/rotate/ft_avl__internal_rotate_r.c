@@ -12,26 +12,19 @@
 
 #include "ft_avl__internal.h"
 
-static t_ft_avl__internal_rotate	collect(t_ft_avl__node *z)
-{
-	return ((t_ft_avl__internal_rotate){
-		z->left,
-		z->left->right,
-	});
-}
-
 void	ft_avl__internal_rotate_r(t_ft_avl__node *z)
 {
-	const t_ft_avl__internal_rotate	d = collect(z);
+	t_ft_avl__node *const	y = z->left;
+	t_ft_avl__node *const	t = y->left;
 
-	z->left = d.t;
-	d.y->right = z;
+	z->left = t;
+	y->right = z;
 	z->depth = z->right->depth;
-	if (z->depth < d.y->depth)
-		z->depth = d.y->depth;
+	if (z->depth < y->depth)
+		z->depth = y->depth;
 	z->depth++;
-	d.y->depth = d.y->left->depth;
-	if (d.y->depth < z->depth)
-		d.y->depth = z->depth;
-	d.y->depth++;
+	y->depth = y->left->depth;
+	if (y->depth < z->depth)
+		y->depth = z->depth;
+	y->depth++;
 }
