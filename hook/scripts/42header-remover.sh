@@ -7,16 +7,7 @@ FILE_NAME="fake_file_name (file name is useless too)    "
 PLACEHOLDER="PLACEHOLDER_FOR_FILE_NAME_UP_TO_45_CHARACTERS"
 
 if [ "$( < "$1" tr -d '\n' | grep -Ec \\/\\\*\ \\\*\{74\}\ \\\*\\/\\/\\\*.\*\\\*\\/\\/\\\*.\*\\\*\\/\\/\\\*.\{3\}\(\[\^\ \]\*\).\*\\\*\\/\\/\\\*.\*\\\*\\/\\/\\\*\ \ \ By:\ \(\[\^\ \]\*\).\*\\\*\\/\\/\\\*.\*\\\*\\/\\/\\\*\ \ \ Created:\ \(\[\^\ \]\*\ \[\^\ \]\*\)\ by\ \(\[\^\ \]\*\).\*\\\*\\/\\/\\\*\ \ \ Updated:\ \(\[\^\ \]\*\ \[\^\ \]\*\)\ by\ \(\[\^\ \]\*\).\*\\\*\\/\\/\\\*.\*\\\*\\/\\/\\\*\ \\\*\{74\}\ \\\*\\/)" = "1" ] ; then
-  sed "s/$PLACEHOLDER/$FILE_NAME/" < hook/assets/42header-c-template.txt > "$1.tmp"
-  tail -n +12 "$1" >> "$1.tmp"
-  mv "$1" "$1.bak"
-  mv "$1.tmp" "$1"
-  rm -f "$1.bak"
-  git add "$1"
-fi
-
-if head -11 < "$1" | grep -Eo ".{25}$" | cmp -s hook/assets/42header-t-form-11x25.txt; then
-  sed "s/$PLACEHOLDER/$FILE_NAME/" < hook/assets/42header-t-template.txt > "$1.tmp"
+  sed "s/$PLACEHOLDER/$FILE_NAME/" < hook/assets/42header-template.txt > "$1.tmp"
   tail -n +12 "$1" >> "$1.tmp"
   mv "$1" "$1.bak"
   mv "$1.tmp" "$1"
