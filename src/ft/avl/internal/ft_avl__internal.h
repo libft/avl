@@ -10,33 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_AVL__TYPES_H
-# define FT_AVL__TYPES_H
+#ifndef FT_AVL__INTERNAL_H
+# define FT_AVL__INTERNAL_H
 
-# include <stddef.h>
+# include "ft_avl__types.h"
 
-typedef struct s_ft_avl__node
+void	ft_avl__internal_rotate_l(t_ft_avl__node *z);
+void	ft_avl__internal_rotate_r(t_ft_avl__node *z);
+void	ft_avl__internal_balance_ll(t_ft_avl__node *z);
+void	ft_avl__internal_balance_lr(t_ft_avl__node *z);
+void	ft_avl__internal_balance_rl(t_ft_avl__node *z);
+void	ft_avl__internal_balance_rr(t_ft_avl__node *z);
+
+typedef struct s_ft_avl__internal_rotate
 {
-	struct s_ft_avl__node	*parent;
-	struct s_ft_avl__node	*left;
-	struct s_ft_avl__node	*right;
-	void					*key;
-	size_t					key_length;
-	size_t					depth;
-	unsigned char			value[];
-}	t_ft_avl__node;
-
-typedef int	(*t_ft_avl__key_comparator)(
-				void *a,
-				size_t a_length,
-				void *b,
-				size_t b_length);
-
-typedef struct s_ft_avl
-{
-	t_ft_avl__node				*root;
-	size_t						sizeof_value;
-	t_ft_avl__key_comparator	comparator;
-}	t_ft_avl;
+	t_ft_avl__node	*y;
+	t_ft_avl__node	*t;
+}	t_ft_avl__internal_rotate;
 
 #endif

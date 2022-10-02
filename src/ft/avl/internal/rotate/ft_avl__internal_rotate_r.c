@@ -10,33 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_AVL__TYPES_H
-# define FT_AVL__TYPES_H
+#include "ft_avl__internal.h"
 
-# include <stddef.h>
-
-typedef struct s_ft_avl__node
+static t_ft_avl__internal_rotate	collect(t_ft_avl__node *z)
 {
-	struct s_ft_avl__node	*parent;
-	struct s_ft_avl__node	*left;
-	struct s_ft_avl__node	*right;
-	void					*key;
-	size_t					key_length;
-	size_t					depth;
-	unsigned char			value[];
-}	t_ft_avl__node;
+	return ((t_ft_avl__internal_rotate){
+		z->left,
+		z->left->right,
+	});
+}
 
-typedef int	(*t_ft_avl__key_comparator)(
-				void *a,
-				size_t a_length,
-				void *b,
-				size_t b_length);
-
-typedef struct s_ft_avl
+void	ft_avl__internal_rotate_r(t_ft_avl__node *z)
 {
-	t_ft_avl__node				*root;
-	size_t						sizeof_value;
-	t_ft_avl__key_comparator	comparator;
-}	t_ft_avl;
+	const t_ft_avl__internal_rotate	d = collect(z);
 
-#endif
+	z->left = d.t;
+	d.t->parent = z;
+	d.y->right = z;
+	z->parent = d.y;
+	z->depth = z->right->depth;
+	if (z->depth < d.y->depth)
+		z->depth = d.y->depth;
+	z->depth++;
+	d.y->depth = d.y->left->depth;
+	if (d.y->depth < z->depth)
+		d.y->depth = z->depth;
+	d.y->depth++;
+}
