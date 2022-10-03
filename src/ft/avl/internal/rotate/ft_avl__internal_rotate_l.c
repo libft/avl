@@ -12,7 +12,7 @@
 
 #include "ft_avl__internal.h"
 
-void	ft_avl__internal_rotate_l(t_ft_avl__node *z)
+t_ft_avl__node	*ft_avl__internal_rotate_l(t_ft_avl__node *z)
 {
 	t_ft_avl__node *const	y = z->right;
 	t_ft_avl__node *const	t = y->left;
@@ -27,4 +27,5 @@ void	ft_avl__internal_rotate_l(t_ft_avl__node *z)
 	if (y->depth < z->depth)
 		y->depth = z->depth;
 	y->depth++;
+	return (y);
 }

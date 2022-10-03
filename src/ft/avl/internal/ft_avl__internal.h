@@ -20,17 +20,17 @@ t_ft_avl__node	*ft_avl__internal_new_node(
 					size_t key_length,
 					void *value,
 					size_t value_length);
-void			ft_avl__internal_rotate_l(
+t_ft_avl__node	*ft_avl__internal_rotate_l(
 					t_ft_avl__node *z);
-void			ft_avl__internal_rotate_r(
+t_ft_avl__node	*ft_avl__internal_rotate_r(
 					t_ft_avl__node *z);
-void			ft_avl__internal_balance_ll(
+t_ft_avl__node	*ft_avl__internal_balance_ll(
 					t_ft_avl__node *z);
-void			ft_avl__internal_balance_lr(
+t_ft_avl__node	*ft_avl__internal_balance_lr(
 					t_ft_avl__node *z);
-void			ft_avl__internal_balance_rl(
+t_ft_avl__node	*ft_avl__internal_balance_rl(
 					t_ft_avl__node *z);
-void			ft_avl__internal_balance_rr(
+t_ft_avl__node	*ft_avl__internal_balance_rr(
 					t_ft_avl__node *z);
 
 #endif
